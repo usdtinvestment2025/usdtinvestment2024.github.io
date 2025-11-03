@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USDT Investment App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            border: 2px solid #00b4d8;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00b4d8;
+            margin-bottom: 10px;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 2px solid #00b4d8;
+        }
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00b4d8;
+            text-align: center;
+        }
+        .balance {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+            color: #00b4d8;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+        button {
+            background: linear-gradient(45deg, #00b4d8, #0077b6);
+            color: white;
+            border: none;
+            padding: 16px;
+            margin: 8px 0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:active {
+            transform: scale(0.98);
+            background: linear-gradient(45deg, #0077b6, #005b8a);
+        }
+        .plan-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 10px;
+            border: 1px solid #00b4d8;
+            cursor: pointer;
+        }
+        .plan-card:active {
+            background: rgba(0,180,216,0.2);
+        }
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .plan-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00b4d8;
+        }
+        .plan-profit {
+            font-size: 16px;
+            color: #4cc9f0;
+            font-weight: bold;
+        }
+        .address-box {
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 14px;
+            border: 1px solid #00b4d8;
+            text-align: center;
+            font-family: monospace;
+        }
+        .success-msg {
+            background: rgba(46,204,113,0.3);
+            border: 1px solid #27ae60;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">💰 USDT INVESTMENT</div>
+            <div>Weekly Profit Investment Platform</div>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="card">
+            <div class="card-title">💼 INVESTMENT WALLET</div>
+            <div class="balance" id="balance">0 USDT</div>
+            <div class="info-row">
+                <span>Total Deposits:</span>
+                <span id="totalDeposits">0 USDT</span>
+            </div>
+            <div class="info-row">
+                <span>Pending Profit:</span>
+                <span id="pendingProfit">0 USDT</span>
+            </div>
+        </div>
+
+        <!-- Investment Plans -->
+        <div class="card">
+            <div class="card-title">📈 INVESTMENT PLANS</div>
+            
+            <div class="plan-card" onclick="selectPlan(500)">
+                <div class="plan-header">
+                    <div class="plan-amount">Invest 500 USDT</div>
+                    <div class="plan-profit">+200 USDT</div>
+                </div>
+                <div>Weekly Profit: 200 USDT</div>
+            </div>
+
+            <div class="plan-card" onclick="selectPlan(1000)">
+                <div class="plan-header">
+                    <div class="plan-amount">Invest 1000 USDT</div>
+                    <div class="plan-profit">+500 USDT</div>
+                </div>
+                <div>Weekly Profit: 500 USDT</div>
+            </div>
+
+            <div class="plan-card" onclick="selectPlan(2000)">
+                <div class="plan-header">
+                    <div class="plan-amount">Invest 2000 USDT</div>
+                    <div class="plan-profit">+1200 USDT</div>
+                </div>
+                <div>Weekly Profit: 1200 USDT</div>
+            </div>
+
+            <div class="plan-card" onclick="selectPlan(5000)">
+                <div class="plan-header">
+                    <div class="plan-amount">Invest 5000 USDT</div>
+                    <div class="plan-profit">+4000 USDT</div>
+                </div>
+                <div>Weekly Profit: 4000 USDT</div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <button onclick="showDeposit()">💸 DEPOSIT USDT</button>
+        <button onclick="showWithdraw()">🔄 WITHDRAW PROFITS</button>
+
+        <!-- Success Message -->
+        <div class="success-msg" id="message"></div>
+
+        <!-- Deposit Section (Hidden by default) -->
+        <div class="card" id="depositSection" style="display:none;">
+            <div class="card-title">🔗 DEPOSIT ADDRESS</div>
+            <div class="address-box">0x55b333f9fd04bd40e653de6e3878d24937e8c92e</div>
+            <button onclick="copyAddress()">📋 COPY ADDRESS</button>
+            <div style="text-align:center; margin-top:10px; font-size:12px; color:#ccc;">
+                Send USDT via BEP20 network only
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // User data
+        let userData = {
+            balance: 0,
+            totalDeposits: 0,
+            pendingProfit: 0
+        };
+
+        // Load data
+        function loadData() {
+            const saved = localStorage.getItem('usdtAppData');
+            if (saved) {
+                userData = JSON.parse(saved);
+            }
+            updateDisplay();
+        }
+
+        // Save data
+        function saveData() {
+            localStorage.setItem('usdtAppData', JSON.stringify(userData));
+        }
+
+        // Update display
+        function updateDisplay() {
+            document.getElementById('balance').textContent = userData.balance + ' USDT';
+            document.getElementById('totalDeposits').textContent = userData.totalDeposits + ' USDT';
+            document.getElementById('pendingProfit').textContent = userData.pendingProfit + ' USDT';
+        }
+
+        // Select investment plan
+        function selectPlan(amount) {
+            const profits = {500:200, 1000:500, 2000:1200, 5000:4000};
+            showMessage('Selected: ' + amount + ' USDT investment\nWeekly profit: ' + profits[amount] + ' USDT');
+            
+            // Update user data
+            userData.totalDeposits += amount;
+            userData.balance += amount;
+            userData.pendingProfit += profits[amount];
+            saveData();
+            updateDisplay();
+            
+            showDeposit();
+        }
+
+        // Show deposit section
+        function showDeposit() {
+            document.getElementById('depositSection').style.display = 'block';
+        }
+
+        // Show withdraw
+        function showWithdraw() {
+            showMessage('For withdrawals, contact support with:\n• Your wallet address\n• Amount to withdraw\n• Transaction proof');
+        }
+
+        // Copy address
+        function copyAddress() {
+            const address = "0x55b333f9fd04bd40e653de6e3878d24937e8c92e";
+            navigator.clipboard.writeText(address).then(() => {
+                showMessage('✅ Address copied to clipboard!');
+            }).catch(() => {
+                // Fallback
+                const textArea = document.createElement('textarea');
+                textArea.value = address;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showMessage('✅ Address copied!');
+            });
+        }
+
+        // Show message
+        function showMessage(text) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize
+        window.onload = loadData;
+    </script>
+</body>
+</html>
